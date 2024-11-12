@@ -1,9 +1,9 @@
 /*
-  Program Goal:
-  This program blinks the LED on pin 9 of the Arduino board, turning it on for 1 second and off for 1 second in a continuous loop.
+  Goal:
+  Blinks the LED on pin 9 of the Arduino board, turning it on for 1 second and off for 1 second in a continuous loop.
    
   Main Theme:
-  The main theme of this program is controlling a digital output (LED) using digitalWrite and delay functions in Arduino.
+  Controlling a digital output (LED) using digitalWrite and delay functions in Arduino.
 */
 
 void setup() {
