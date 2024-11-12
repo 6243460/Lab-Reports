@@ -1,27 +1,14 @@
 /*
- * Program Name: LED Pattern Program
- * Goal: 
- *   This program controls four LEDs connected to the Arduino. 
- *   It creates a sequence where the LEDs turn on and off in different patterns.
- *   The program makes the LEDs blink in various combinations, including all on, some on, and all off. 
- *   Each pattern is displayed for a fixed amount of time, defined by the variable 'timewait'.
- * 
- * Main Theme:
- *   The program demonstrates **digital output control** and **timing** using the `delay()` function.
- *   It showcases the concept of controlling multiple LEDs simultaneously to create patterns.
- * 
- * Hardware Connections:
- *   - LED 1 connected to pin 9
- *   - LED 2 connected to pin 8
- *   - LED 3 connected to pin 7
- *   - LED 4 connected to pin 6
- *   - Each LED should be connected through a current-limiting resistor to avoid damage to the LEDs.
- */
+  Goal: 
+  Controls four LEDs connected to the Arduino, 
+  Main Theme:
+  Controlling digital output and timing using the delay function with the timing interval defined by a variable, to sequentially switch LEDs on and off, creating a light chaser effect.
+*/
 
-int timewait = 500; // Set the time between each pattern change (500 milliseconds)
+int timewait = 500; // Set the time between each pattern change to 500 milliseconds
 
 void setup() {
-  // Set the pins 9, 8, 7, and 6 as output pins for controlling LEDs
+  // Set the pins 9, 8, 7, and 6 as output 
   pinMode(9, OUTPUT);  // LED 1
   pinMode(8, OUTPUT);  // LED 2
   pinMode(7, OUTPUT);  // LED 3
@@ -29,14 +16,14 @@ void setup() {
 }
 
 void loop() {
-  // Pattern 1: Only LED 1 is on
+  // Pattern 1: Only LED 1 is on, 
   digitalWrite(9, HIGH);   
   digitalWrite(8, LOW);  
   digitalWrite(7, LOW);   
   digitalWrite(6, LOW);    
   delay(timewait);               
 
-  // Pattern 2: LEDs 1 and 2 are on
+  // Pattern 2: LEDs 1 and 2 are on,  
   digitalWrite(9, HIGH);   
   digitalWrite(8, HIGH);   
   digitalWrite(7, LOW);     
@@ -44,58 +31,45 @@ void loop() {
   delay(timewait);               
 
   // Pattern 3: LEDs 1, 2, and 3 are on
-  digitalWrite(7, HIGH);   
+  digitalWrite(9, HIGH);   
   digitalWrite(8, HIGH);   
-  digitalWrite(9, HIGH);    
+  digitalWrite(7, HIGH);    
   digitalWrite(6, LOW);    
   delay(timewait);            
 
   // Pattern 4: All LEDs are on
-  digitalWrite(6, HIGH);   
+  digitalWrite(9, HIGH);   
   digitalWrite(8, HIGH);   
   digitalWrite(7, HIGH);   
-  digitalWrite(9, HIGH);    
+  digitalWrite(6, HIGH);    
   delay(timewait);              
 
-  // Pattern 5: All LEDs are off
-  digitalWrite(7, LOW);   
-  digitalWrite(9, LOW);   
-  digitalWrite(8, LOW);    
-  digitalWrite(6, LOW);
-  delay(timewait);             
-
-  // Pattern 6: Only LED 4 is on
+  // Pattern 5: Only LED 4 is on
   digitalWrite(9, LOW); 
   digitalWrite(8, LOW);   
   digitalWrite(7, LOW);    
   digitalWrite(6, HIGH);
   delay(timewait);             
 
-  // Pattern 7: LEDs 3 and 4 are on
+  // Pattern 6: LEDs 3 and 4 are on
   digitalWrite(9, LOW);    
   digitalWrite(8, LOW);   
   digitalWrite(7, HIGH);    
   digitalWrite(6, HIGH);    
   delay(timewait);              
 
-  // Pattern 8: LEDs 2, 3, and 4 are on
+  // Pattern 7: LEDs 2, 3, and 4 are on
   digitalWrite(9, LOW);    
   digitalWrite(8, HIGH);  
   digitalWrite(7, HIGH);   
   digitalWrite(6, HIGH);   
   delay(timewait);        
 
-  // Pattern 9: All LEDs are on
+  // Pattern 8: All LEDs are on
   digitalWrite(9, HIGH);    
   digitalWrite(8, HIGH);   
   digitalWrite(7, HIGH);    
   digitalWrite(6, HIGH);   
   delay(timewait);        
 
-  // Pattern 10: All LEDs are off
-  digitalWrite(7, LOW);   
-  digitalWrite(9, LOW);   
-  digitalWrite(8, LOW);    
-  digitalWrite(6, LOW);
-  delay(timewait);         
 }
