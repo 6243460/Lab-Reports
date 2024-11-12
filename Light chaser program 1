@@ -1,19 +1,10 @@
 /*
-   Goal: 
-   Controls three LEDs connected to the Arduino. 
-   The LEDs will light up in a "chase" pattern where only one LED is on at a time,
-   and it moves from one LED to the next in a sequence. Each LED stays on for 1 second.
+  Goal: 
+  Control three LEDs connected to the Arduino, lighting them up in a "chase" pattern where only one LED is on at a time, sequentially moving from one LED to the next, with each LED staying on for 1 second.
  
-   Main Theme:
-   The program demonstrates basic **digital output control** and **timing** using the delay function.
-   It uses simple **LED switching** to create a light chaser effect, which is commonly used in visual effects.
- 
-   Hardware Connections:
-   - LED 1 connected to pin 9
-   - LED 2 connected to pin 8
-   - LED 3 connected to pin 7
-   - All LEDs are connected to the Arduino through appropriate resistors to limit current.
- */
+  Main Theme:
+  Controlloing digital output and timing using the delay function to sequentially switch LEDs on and off, creating a light chaser effect.
+*/
 
 void setup() {
   // Set the pins 9, 8, and 7 as output pins for controlling LEDs
