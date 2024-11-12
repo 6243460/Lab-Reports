@@ -7,20 +7,10 @@
 */
 
 void setup() {
-  // Initialize pin 9 as an output
-  pinMode(9, OUTPUT);
+  pinMode(9, OUTPUT);  // Set pin 9 as an output 
 }
 
 void loop() {
-  // Turn the LED on by setting the LED pin to HIGH
-  digitalWrite(9, HIGH);   
-  
-  // Wait for 1 second 
-  delay(1000);                       
-  
-  // Turn the LED off by setting the LED pin to LOW
-  digitalWrite(9, LOW);    
-  
-  // Wait for 1 second
-  delay(1000);                       
+  digitalWrite(9, !digitalRead(9));  // Read the current state of the LED, if the LED is on, turn it off. If off, turn it on.
+  delay(1000);  // Wait for 1 second
 }
