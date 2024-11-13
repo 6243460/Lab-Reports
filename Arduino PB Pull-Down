@@ -14,7 +14,7 @@
  *   - A **10kΩ pull-down resistor** is connected between the **button pin** (pin 7) and **GND**.
  */
 
-const int buttonPin = 7;  // Pin where the push button is connected
+const int buttonPin = 2;  // Pin where the push button is connected
 
 void setup() {
   // Start the Serial Monitor for displaying button state
