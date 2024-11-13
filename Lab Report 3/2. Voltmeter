@@ -15,9 +15,9 @@ void loop() {
   //print outthe value you red
   Serial.print("BitValue: ");
   Serial.println(potPin);
-  Serial.printIn("\t");
-  Serial.printIn("voltage");
-  Serial.printIn(voltage);
+  Serial.println("\t");
+  Serial.println("voltage");
+  Serial.println(voltage);
 
   // Add a small delay for stability in the output
   delay(100);
