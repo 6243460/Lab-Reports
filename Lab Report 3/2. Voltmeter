@@ -1,17 +1,23 @@
 int potPin;  // Pin where potentiometer is connected
+float voltage;
 
 void setup() {
-  // Start the Serial Monitor for displaying the potentiometer value
-  Serial.begin(9600);
+  
+  Serial.begin(9600); // Start the Serial Monitor for displaying the potentiometer value
 }
 
 void loop() {
-  // Read the potentiometer value (0 to 1023)
-  potPin = analogRead(A2);
-
-  // Display the potentiometer value (raw bit value from 0 to 1023)
+ 
+  potPin = analogRead(A2);  // Read the potentiometer value (0 to 1023)
+  
+  voltage =  potPin * (5.0/1023.0); // convert analog reading to voltage
+  
+  //print outthe value you red
   Serial.print("BitValue: ");
   Serial.println(potPin);
+  Serial.printIn("\t");
+  Serial.printIn("voltage");
+  Serial.printIn(voltage);
 
   // Add a small delay for stability in the output
   delay(100);
