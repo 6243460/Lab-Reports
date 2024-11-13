@@ -1,1 +1,18 @@
+const int potPin = A0;  // Pin where potentiometer is connected
 
+void setup() {
+  // Start the Serial Monitor for displaying the potentiometer value
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Read the potentiometer value (0 to 1023)
+  int potValue = analogRead(potPin);
+
+  // Display the potentiometer value (raw bit value from 0 to 1023)
+  Serial.print("Potentiometer Value: ");
+  Serial.println(potValue);
+
+  // Add a small delay for stability in the output
+  delay(100);
+}
