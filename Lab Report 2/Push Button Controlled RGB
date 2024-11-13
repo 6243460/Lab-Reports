@@ -1,0 +1,45 @@
+/*
+  Goal:
+  Use a push button to control an RGB LED for when the PB is not pressed, the RGB LED will display white, if it is pressed, the RGB LED will turn OFF.
+
+  Main Theme:
+  Demonstrates the use a digital input (PB) to control the state of an digital output (RGB LED).
+  
+*/
+
+const int redPin = 9;    // Pin for Red color (PWM)
+const int greenPin = 10; // Pin for Green color (PWM)
+const int bluePin = 11;  // Pin for Blue color (PWM)
+const int buttonPin = 2; // Pin for push button (Digital Input)
+
+void setup() {
+  // Set RGB LED pins as OUTPUT
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(bluePin, OUTPUT);
+  
+  pinMode(buttonPin, INPUT_PULLUP); // Set the push button pin as INPUT with internal pull-up resistor
+
+  Serial.begin(9600); // Start the serial monitor 
+}
+
+void loop() {
+  int buttonState = digitalRead(buttonPin); // Read the state of the push button
+
+  if (buttonState == HIGH) { // If button state high, Turn the RGB LED to white (Red, Green, Blue all ON)
+    analogWrite(redPin, 255);   // Max brightness for Red
+    analogWrite(greenPin, 255); // Max brightness for Green
+    analogWrite(bluePin, 255);  // Max brightness for Blue
+    
+    Serial.println(ButtonState); // Print the state of the pushbutton to the Serial Monitor.
+  } 
+  else { // If button state LOW, Turn off the RGB LED
+    analogWrite(redPin, 0);   // Red OFF
+    analogWrite(greenPin, 0); // Green OFF
+    analogWrite(bluePin, 0);  // Blue OFF
+    
+    Serial.println(buttonstate); // Print the state of the pushbutton to the Serial Monitor.
+  }
+
+  delay(100); // wait 100 milliseconds
+}
