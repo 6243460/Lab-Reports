@@ -1,0 +1,27 @@
+const int analogPin = A2;  // Pin where the voltage across the unknown resistor is measured
+const float knownResistor = 1000.0;  // Known resistor value (in ohms), e.g., 1kΩ
+
+void setup() {
+  // Initialize the Serial Monitor for displaying resistance readings
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Read the voltage across the unknown resistor
+  int analogValue = analogRead(analogPin);
+
+  // Convert the analog value to a voltage (0-5V)
+  float voltageAcrossUnknownResistor = analogValue * (5.0 / 1023.0);
+
+  // Calculate the resistance of the unknown resistor using the voltage divider formula
+  // R_unknown = R_known * (V_unknown / (V_in - V_unknown))
+  float unknownResistor = knownResistor * (voltageAcrossUnknownResistor / (5.0 - voltageAcrossUnknownResistor));
+
+  // Display the calculated resistance value on the Serial Monitor
+  Serial.print("Unknown Resistor Value: ");
+  Serial.print(unknownResistor);
+  Serial.println(" Ohms");
+
+  // Add a small delay for stability
+  delay(500);
+}
