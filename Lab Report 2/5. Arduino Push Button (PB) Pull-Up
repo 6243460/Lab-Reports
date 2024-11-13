@@ -2,7 +2,7 @@
   Goal:
   Reads the state of a push button connected to the Arduino, prints 0 when pressed and 1 when not pressed to the Serial Monitor every 500 milliseconds.
   
-  Main Theme: Demonstrates digital input (reading the state of a push button) and Serial.print (printing the button state to the Serial Monitor).
+  Main Theme: Demonstrates digital input (reading the state of a push button) and Serial.print (printing the button state to the Serial Monitor) with a pull-up resistor.
 
 */
 
