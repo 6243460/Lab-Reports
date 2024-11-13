@@ -1,1 +1,54 @@
+const int ledPin = 2;        // Pin where the LED is connected
+const int buttonPin = 7;      // Pin where the push button is connected
 
+unsigned long previousMillis = 0;  // Store the last time LED was updated
+const long interval = 500;         // Blink interval (500ms)
+
+unsigned long blinkDuration = 5000; // Total blink duration in milliseconds (5 seconds)
+unsigned long startMillis = 0;     // Start time of the blinking
+
+void setup() {
+  // Initialize the LED pin as an output
+  pinMode(ledPin, OUTPUT);
+  
+  // Initialize the push button pin as input with internal pull-up resistor
+  pinMode(buttonPin, INPUT_PULLUP);
+  
+  // Initialize serial communication for displaying the PB value
+  Serial.begin(9600);
+  
+  // Record the start time for the 5-second blink duration
+  startMillis = millis();
+}
+
+void loop() {
+  unsigned long currentMillis = millis();  // Get the current time
+  
+  // Check if 5 seconds have passed
+  if (currentMillis - startMillis <= blinkDuration) {
+    // Blink the LED at 500ms interval without using delay()
+    if (currentMillis - previousMillis >= interval) {
+      // Save the last time LED was updated
+      previousMillis = currentMillis;
+
+      // Toggle the LED
+      digitalWrite(ledPin, !digitalRead(ledPin));
+    }
+  } else {
+    // After 5 seconds, turn the LED off (optional)
+    digitalWrite(ledPin, LOW);
+  }
+
+  // Read the state of the push button (PB)
+  int buttonState = digitalRead(buttonPin);
+
+  // Display the PB value on the Serial Monitor
+  if (buttonState == LOW) {  // Button pressed (pull-down active)
+    Serial.println("Button Pressed");
+  } else {  // Button not pressed (pull-up active)
+    Serial.println("Button Not Pressed");
+  }
+  
+  // Add a small delay to make serial output more readable
+  delay(100);
+}
