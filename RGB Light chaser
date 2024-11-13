@@ -1,42 +1,129 @@
 /*
- * Program Name: RGB Light Chaser
- * Goal:
- *   This program controls an RGB LED and creates a light chaser effect.
- *   The RGB LED will light up in a sequence where one color turns on at a time, and it "chases" through red, green, and blue.
- *   The pattern will repeat continuously, with each color staying on for 500 milliseconds.
- * 
- * Main Theme:
- *   The program demonstrates how to control an RGB LED using **digital output** pins and **timing** with the `delay()` function.
- *   It creates a visual effect by changing the colors of the LED in a "chase" sequence.
- * 
- * Hardware Connections:
- *   - RGB LED connected to pins: Red (pin 9), Green (pin 10), and Blue (pin 11)
- *   - Each LED in the RGB is connected to the Arduino through appropriate current-limiting resistors.
- */
+  Goal:
+  Controls 2 RGB light connected to an Arduino, lighting them up progressively back and forth.
+ 
 
-void setup() {
-  // Set the pins for Red, Green, and Blue as OUTPUT
-  pinMode(9, OUTPUT); // Red pin
-  pinMode(10, OUTPUT); // Green pin
-  pinMode(11, OUTPUT); // Blue pin
+  Main Theme:
+  Controlling digital output using the digitalWrite function for each LED and timing using the delay function, defined by a variable.
+*/
+
+int timewait = 500; // Set the time between each pattern change to 500 milliseconds
+
+ void setup () {
+ // Initialize pin 11,10,9,3,2,1 as an output
+pinMode(11, OUTPUT);   // RGB LED 1 (Red)
+pinMode(10, OUTPUT);   // RGB LED 1 (Green)
+pinMode(9, OUTPUT);    // RGB LED 1 (Blue)
+pinMode(3, OUTPUT);    // RGB LED 2 (Red)
+pinMode(2, OUTPUT);    // RGB LED 2 (Green)
+pinMode(1, OUTPUT);    // RGB LED 2 (Blue)          
 }
 
 void loop() {
-  // Turn on Red, Green, Blue LEDs one at a time, with a 500ms delay for each
-  digitalWrite(9, HIGH);  // Red on
-  digitalWrite(10, LOW);  // Green off
-  digitalWrite(11, LOW);  // Blue off
-  delay(500);              // Wait for 500 milliseconds
+  // Pattern 1: Only Red RGB LED 1 is on for 500ms
+  digitalWrite(11, HIGH); 
+  digitalWrite(10, LOW);  
+  digitalWrite(9, LOW);    
+  digitalWrite(3, LOW);   
+  digitalWrite(2, LOW);   
+  digitalWrite(1, LOW);   
+  delay(timewait);             
 
-  digitalWrite(9, LOW);   // Red off
-  digitalWrite(10, HIGH); // Green on
-  digitalWrite(11, LOW);  // Blue off
-  delay(500);              // Wait for 500 milliseconds
+  // Pattern 2: Only Red RGB LED 2 is on for 500ms
+  digitalWrite(11, LOW);   
+  digitalWrite(10, LOW);   
+  digitalWrite(9, LOW);   
+  digitalWrite(3, HIGH);   
+  digitalWrite(2, LOW);    
+  digitalWrite(1, LOW);  
+  delay(timewait);             
+  
+  // Pattern 3: All LEDs are off for 500ms
+  digitalWrite(11, LOW);   
+  digitalWrite(10, LOW);   
+  digitalWrite(9, LOW);    
+  digitalWrite(3, LOW);   
+  digitalWrite(2, LOW);   
+  delay(timewait);              
 
-  digitalWrite(9, LOW);   // Red off
-  digitalWrite(10, LOW);  // Green off
-  digitalWrite(11, HIGH); // Blue on
-  delay(500);              // Wait for 500 milliseconds
+  // Pattern 4: Only Green RGB LED 2 is on for 500ms
+  digitalWrite(11, LOW);   
+  digitalWrite(10, LOW);   
+  digitalWrite(9, LOW);    
+  digitalWrite(3, LOW);    
+  digitalWrite(2, HIGH);  
+  digitalWrite(1, LOW);     
+  delay(timewait);             
 
-  // Repeat the sequence
+  // Pattern 5: Only Green RGB LED 1 is on for 500ms
+  digitalWrite(11, LOW);  
+  digitalWrite(10, HIGH); 
+  digitalWrite(9, LOW);    
+  digitalWrite(3, LOW);    
+  digitalWrite(2, LOW);   
+  digitalWrite(1, LOW);     
+  delay(timewait);             
+  
+  // Pattern 6: All LEDs are off for 500ms
+  digitalWrite(11, LOW);   
+  digitalWrite(10, LOW);   
+  digitalWrite(9, LOW);   
+  digitalWrite(3, LOW);    
+  digitalWrite(2, LOW);   
+  digitalWrite(1, LOW);   
+  delay(timewait);             
+  
+  // Pattern 7: Only Blue RGB LED 1 is on for 500ms
+  digitalWrite(11, LOW);   
+  digitalWrite(10, LOW);   
+  digitalWrite(9, HIGH);   
+  digitalWrite(3, LOW);   
+  digitalWrite(2, LOW);    
+  digitalWrite(1, LOW);    
+    delay(timewait);              
+
+  // Pattern 8: Only Blue RGB LED 2 is on for 500ms
+  digitalWrite(11, LOW);   
+  digitalWrite(10, LOW);  
+  digitalWrite(9, LOW);   
+  digitalWrite(3, LOW);   
+  digitalWrite(2, LOW);   
+  digitalWrite(1, HIGH);   
+  delay(timewait);              
+  
+  // Pattern 9: All LEDs are off for 500ms
+  digitalWrite(11, LOW);  
+  digitalWrite(10, LOW);  
+  digitalWrite(9, LOW);    
+  digitalWrite(3, LOW);    
+  digitalWrite(2, LOW);   
+  digitalWrite(1, LOW);    
+  delay(timewait);              
+  
+  // Pattern 10: Red, Green, and Blue of RGB LED 2 are on for 500ms
+  digitalWrite(11, LOW);   
+  digitalWrite(10, LOW);   
+  digitalWrite(9, LOW);    
+  digitalWrite(3, HIGH);   
+  digitalWrite(2, HIGH);   
+  digitalWrite(1, HIGH);   
+  delay(timewait);             
+
+  // Pattern 11: Red, Green, and Blue of RGB LED 1 are on for 500ms
+  digitalWrite(11, HIGH);  
+  digitalWrite(10, HIGH);  
+  digitalWrite(9, HIGH);   
+  digitalWrite(3, LOW);  
+  digitalWrite(2, LOW);    
+  digitalWrite(1, LOW);     
+  delay(timewait);              
+  
+  // Pattern 12: All LEDs are off for 500ms
+  digitalWrite(11, LOW);  
+  digitalWrite(10, LOW);   
+  digitalWrite(9, LOW);    
+  digitalWrite(3, LOW);   
+  digitalWrite(2, LOW);    
+  digitalWrite(1, LOW);    
+  delay(timewait);              
 }
