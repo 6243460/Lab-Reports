@@ -1,0 +1,26 @@
+/*
+  Goal:
+  Reads the state of a push button connected to the Arduino, prints 0 when pressed and 1 when not pressed to the Serial Monitor with an internal pull-up resistor.
+  
+  Main Theme: Demonstrates the use of pinMode(INPUT_PULLUP) and digital input (reading the state of a push button) and Serial.print (printing the button state to the Serial Monitor).
+*/
+
+void setup() {
+  
+  Serial.begin(9600); // Start serial communication at a baud rate of 9600
+  
+  pinMode(2, INPUT_PULLUP); // Configure pin 2 as an input pin with an internal pull-up resistor enabled.
+  pinMode(13, OUTPUT); // Configure pin 13 as an output pin of the built in LED
+}
+
+void loop() {
+  int buttonState = digitalRead(2); // Read the current state  of the pushbutton connected to pin 2
+  Serial.println(buttonState); // Print the state of the pushbutton to the Serial Monitor.
+
+  if (buttonState == HIGH) { // Check if buttonState is HIGH , then turn off the LED on pin 13.
+    digitalWrite(13, LOW); 
+    
+  } else { // if not, turn on the LED on pin 13
+    digitalWrite(13, HIGH); 
+  }
+}
