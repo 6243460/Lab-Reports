@@ -1,53 +1,39 @@
-/*
- * Program Name: RGB Color Selector with One Potentiometer
- * Goal:
- *   This program uses one potentiometer to control the brightness of an RGB LED.
- *   The potentiometer adjusts all three colors (Red, Green, Blue) of the RGB LED simultaneously.
- *   When the potentiometer is turned fully to the left, the LED will be off, and when it is turned
- *   to the right, the LED will be white (all colors on).
- * 
- * Main Theme:
- *   This program demonstrates how to use one potentiometer to control the intensity of an RGB LED.
- *   The potentiometer value controls the brightness of all three color channels (Red, Green, Blue).
- * 
- * Hardware Connections:
- *   - Potentiometer connected to pin A0 (middle pin to A0, outer pins to 5V and GND).
- *   - RGB LED connected to pins 9, 10, 11 (with 220Ω resistors).
- */
-
 const int redPin = 9;    // Pin for Red LED
 const int greenPin = 10; // Pin for Green LED
 const int bluePin = 11;  // Pin for Blue LED
-const int potPin = A0;   // Pin for Potentiometer
+const int potPin = A2;   // Pin for Potentiometer
 
 void setup() {
   // Set RGB LED pins as OUTPUT
   pinMode(redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
+}
 
-  // Start the Serial Monitor (optional for debugging)
-  Serial.begin(9600);
+void setColor(int red, int green, int blue) {
+  analogWrite(redPin, red);
+  analogWrite(greenPin, green);
+  analogWrite(bluePin, blue);
 }
 
 void loop() {
-  // Read the potentiometer value (0 to 1023)
-  int potValue = analogRead(potPin);
-
-  // Map the potentiometer value to PWM range (0 to 255)
-  int brightness = map(potValue, 0, 1023, 0, 255);
-
-  // Set all RGB LED colors to the same brightness value (creates a shade of white)
-  analogWrite(redPin, brightness);
-  analogWrite(greenPin, brightness);
-  analogWrite(bluePin, brightness);
-
-  // Print the potentiometer value and mapped brightness to the Serial Monitor
-  Serial.print("Potentiometer Value: ");
-  Serial.print(potValue);
-  Serial.print(" Mapped Brightness: ");
-  Serial.println(brightness);
-
-  // Small delay for stability
-  delay(50);
+  int potValue = analogRead(potPin); // Read potentiometer value (0-1023)
+  
+  // Map the potentiometer value to a range of color indices (0-6)
+  int colorCode = map(potValue, 0, 1023, 0, 6);
+  
+  // Define a color lookup table
+  const int color[7][3] = {
+    {255, 0, 0},   // Red
+    {0, 255, 0},   // Green
+    {0, 0, 255},   // Blue
+    {255, 255, 0}, // Yellow
+    {0, 255, 255}, // Cyan
+    {255, 0, 255}, // Magenta
+    {255, 255, 255} // White
+  };
+  
+  // Set the RGB LED to the color based on the color code
+  setColor(color[colorCode][0], color[colorCode][1], color[colorCode][2]);
 }
+
