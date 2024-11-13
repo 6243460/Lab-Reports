@@ -12,6 +12,8 @@ const int greenPin = 10; // Pin for Green color (PWM)
 const int bluePin = 11;  // Pin for Blue color (PWM)
 const int buttonPin = 2; // Pin for push button (Digital Input)
 
+bool button = false;
+
 void setup() {
   // Set RGB LED pins as OUTPUT
   pinMode(redPin, OUTPUT);
@@ -20,25 +22,23 @@ void setup() {
   
   pinMode(buttonPin, INPUT_PULLUP); // Set the push button pin as INPUT with internal pull-up resistor
 
-  Serial.begin(9600); // Start the serial monitor 
+ 
 }
 
 void loop() {
   int buttonState = digitalRead(buttonPin); // Read the state of the push button
 
   if (buttonState == HIGH) { // If button state high, Turn the RGB LED to white (Red, Green, Blue all ON)
-    analogWrite(redPin, 255);   // Max brightness for Red
-    analogWrite(greenPin, 255); // Max brightness for Green
-    analogWrite(bluePin, 255);  // Max brightness for Blue
+    digitalWrite(redPin, HIGH);   
+    digitalWrite(greenPin, HIGH); 
+    digitalWrite(bluePin, HIGH);  
     
-    Serial.println(ButtonState); // Print the state of the pushbutton to the Serial Monitor.
   } 
   else { // If button state LOW, Turn off the RGB LED
-    analogWrite(redPin, 0);   // Red OFF
-    analogWrite(greenPin, 0); // Green OFF
-    analogWrite(bluePin, 0);  // Blue OFF
-    
-    Serial.println(buttonstate); // Print the state of the pushbutton to the Serial Monitor.
+    digitalWrite(redPin, 0);   // Red OFF
+    digitalWrite(greenPin, 0); // Green OFF
+    digitalWrite(bluePin, 0);  // Blue OFF
+     
   }
 
   delay(100); // wait 100 milliseconds
