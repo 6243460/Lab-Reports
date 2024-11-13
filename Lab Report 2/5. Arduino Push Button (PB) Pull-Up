@@ -1,0 +1,20 @@
+/*
+  Goal:
+  Reads the state of a push button connected to the Arduino, prints 0 when pressed and 1 when not pressed to the Serial Monitor every 500 milliseconds.
+  
+  Main Theme: Demonstrates digital input (reading the state of a push button) and Serial.print (printing the button state to the Serial Monitor).
+
+*/
+
+int pushButton = 2;  // Define the pin number where the push button is connected
+
+void setup() {
+  Serial.begin(9600); // Start serial communication at 9600 bits per second 
+  pinMode(pushButton, INPUT); // Set the pushButton pin as an input to read the state of the button
+}
+
+void loop() {
+  int buttonState = digitalRead(pushButton); // Read the current state of the push button (HIGH or LOW) and store it in 'buttonState'
+  Serial.println(buttonState); // Print the current button state to the Serial Monitor (either HIGH or LOW)
+  delay(500);  // Wait for 500 milliseconds before the next reading 
+}
