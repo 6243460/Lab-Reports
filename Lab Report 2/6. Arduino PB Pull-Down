@@ -1,0 +1,20 @@
+/*
+  Goal: Reads a digital input from pin 2, then prints the result (HIGH or LOW) to the Serial Monitor.
+  
+  Main Theme: Demonstrates digital input (reading the state of a push button) and Serial.print (printing the button state to the Serial Monitor) with a pull-down resistor.
+*/
+
+int pushButton = 2;  // Define the pin number where the push button is connected
+
+void setup() {
+
+  Serial.begin(9600);  // Start serial communication with the Serial Monitor at 9600 baud rate
+  pinMode(pushButton, INPUT);  // Set the pin 2 (pushButton) as an input to read the button state
+}
+
+
+void loop() {
+  int buttonState = digitalRead(pushButton);  // Read the state of the button on pin 2 (HIGH or LOW)
+  Serial.println(buttonState);  // Print the button's state (0 or 1) to the Serial Monitor
+  delay(1);  // Wait for 1 milliseconds before the next reading 
+}
