@@ -16,5 +16,5 @@ void setup() {
 void loop() {
   int buttonState = digitalRead(pushButton); // Read the current state of the push button (HIGH or LOW) and store it in 'buttonState'
   Serial.println(buttonState); // Print the current button state to the Serial Monitor (either HIGH or LOW)
-  delay(500);  // Wait for 500 milliseconds before the next reading 
+  delay(1);  // Wait for 1 milliseconds before the next reading 
 }
