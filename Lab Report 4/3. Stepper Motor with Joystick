@@ -1,46 +1,65 @@
-//this code uses a joystick to control a stepper motor's speed.
-//the joystick acts as an input while the stepper motor is the output
-#include <Stepper.h>
-// Define number of steps per revolution (adjust as per your stepper motor)
-#define STEPS 32
-// Define stepper motor control pins
-#define IN1 11
-#define IN2 10
-#define IN3 9
-#define IN4 8
-// Initialize stepper library
+/*
+  Program Goal:
+  &ses a joystick to control the speed and direction of a stepper motor.
+ 
+
+  Main Theme:
+  Using an input (the joystick) to control an digital output (the stepper motor).
+*/
+
+#include <Stepper.h>  // Include the Stepper library for controlling the stepper motor
+
+// Define the number of steps per revolution (adjust based on the stepper motor used)
+#define STEPS 32  
+
+// Define the stepper motor control pins (connected to the motor driver)
+#define IN1 11  // Control pin 1
+#define IN2 10  // Control pin 2
+#define IN3 9   // Control pin 3
+#define IN4 8   // Control pin 4
+
+// Initialize the Stepper library with the defined pins and steps per revolution
 Stepper stepper(STEPS, IN4, IN2, IN3, IN1);
-// Joystick input pin (connected to A0)
-#define joystick A0
-// Define a deadzone range for the joystick
-#define JOYSTICK_DEADZONE_LOW 485
-#define JOYSTICK_DEADZONE_HIGH 535
+
+// Joystick input pin (connected to analog pin A0)
+#define joystick A0  
+
+// Define the joystick deadzone range to avoid small unintended movements
+#define JOYSTICK_DEADZONE_LOW 485   // Low threshold for joystick center
+#define JOYSTICK_DEADZONE_HIGH 535  // High threshold for joystick center
+
 void setup() {
-  // Initialize the serial monitor for debugging
+  // Initialize the serial monitor for debugging output
   Serial.begin(9600);
 }
+
 void loop() {
-  // Read the analog value from the joystick's X-axis
+  // Read the analog value from the joystick's X-axis (value between 0 and 1023)
   int val = analogRead(joystick);
-  // Print joystick value for debugging (you can remove this later)
+
+  // Print the joystick value to the serial monitor for debugging purposes
   Serial.println(val);
-  // Check if the joystick is in the "deadzone" (middle position)
+
+  // Check if the joystick is within the "deadzone" (center position)
   if (val > JOYSTICK_DEADZONE_LOW && val < JOYSTICK_DEADZONE_HIGH) {
-    // Stop the motor (no movement)
-    stepper.setSpeed(0); // Set speed to 0 (stop the motor)
+    // Stop the motor if the joystick is centered (no movement)
+    stepper.setSpeed(0);  // Set motor speed to 0 (stop motor)
   }
+  // Check if the joystick is moved to the right (forward direction)
   else if (val >= JOYSTICK_DEADZONE_HIGH) {
-    // Move the motor forward (clockwise direction)
-    int speed = map(val, JOYSTICK_DEADZONE_HIGH, 1023, 5, 500); // Map joystick value to speed
-    stepper.setSpeed(speed); // Set the motor speed
-    stepper.step(1); // Move motor 1 step forward
+    // Map the joystick value to a speed range (5 to 500) for the motor
+    int speed = map(val, JOYSTICK_DEADZONE_HIGH, 1023, 5, 500); 
+    stepper.setSpeed(speed);  // Set the motor speed based on the joystick input
+    stepper.step(1);  // Move the motor 1 step forward (clockwise direction)
   }
+  // Check if the joystick is moved to the left (backward direction)
   else if (val <= JOYSTICK_DEADZONE_LOW) {
-    // Move the motor backward (counterclockwise direction)
-    int speed = map(val, 0, JOYSTICK_DEADZONE_LOW, 5, 500); // Map joystick value to speed
-    stepper.setSpeed(speed); // Set the motor speed
-    stepper.step(-1); // Move motor 1 step backward
+    // Map the joystick value to a speed range (5 to 500) for the motor
+    int speed = map(val, 0, JOYSTICK_DEADZONE_LOW, 5, 500); 
+    stepper.setSpeed(speed);  // Set the motor speed based on the joystick input
+    stepper.step(-1);  // Move the motor 1 step backward (counterclockwise direction)
   }
-  // Add a small delay to avoid too fast polling (optional)
+
+  // Add a small delay to prevent overly fast polling of the joystick
   delay(10);
 }
