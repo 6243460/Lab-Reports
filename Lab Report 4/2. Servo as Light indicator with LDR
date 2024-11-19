@@ -1,1 +1,49 @@
+/*
+  Program Goal:
+  Reads the light intensity from an LDR (Light Dependent Resistor) connected to an analog pin, maps that value to control the position of a servo motor, 
+  and calculates the corresponding voltage then displays the LDR's raw value, the servo's angle, and the calculated voltage on the Serial Monitor.
+
+  Main Theme:
+  Using an analog input (LDR) to control the position of an analog output (servo motor) based on ambient light levels, 
+  and providing real-time feedback about the LDR value, servo angle, and calculated voltage through the Serial Monitor.
+*/
+
+#include <Servo.h>  // Include the Servo library to control servo motors
+
+Servo myservo;  // Create a Servo object to control the servo motor
+
+int ldrPin = A0;  // Analog pin used to connect the LDR (Light Dependent Resistor)
+int val;    // Variable to store the LDR value (light intensity)
+
+void setup() {
+  myservo.attach(9);  // Attach the servo to pin 9
+  Serial.begin(9600); // Initialize serial communication at 9600 baud rate
+}
+
+void loop() {
+  val = analogRead(ldrPin);  // Read the LDR value (range: 0 to 1023) based on light intensity
+  
+  // Map the LDR value (light intensity) to a servo angle (range: 0 to 180 degrees)
+  int angle = map(val, 96, 280, 0, 180);     
+  
+  myservo.write(angle);  // Set the servo position based on the mapped angle
+  
+  // Map the LDR value to a voltage (scaled from 0 to 5V)
+  int volt = map(val, 0, 1023, 0, 500);  
+  float voltage = volt / 100.0;  // Convert the scaled value to a floating-point voltage (0.0 to 5.0V)
+
+  // Print the raw LDR value (light intensity) to the Serial Monitor
+  Serial.print("bitvalue =");
+  Serial.print(val);
+  Serial.print("\t");  // Add a tab space for better readability
+  
+  // Print the corresponding servo angle to the Serial Monitor
+  Serial.print("angle =");
+  Serial.print(angle);
+  Serial.print("\t");  // Add a tab space for better readability
+  
+  // Print the calculated voltage (based on LDR value) to the Serial Monitor
+  Serial.print("voltage =");
+  Serial.println(voltage);  // Print the voltage followed by a newline character
+}
 
