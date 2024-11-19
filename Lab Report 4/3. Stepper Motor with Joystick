@@ -2,7 +2,6 @@
   Program Goal:
   &ses a joystick to control the speed and direction of a stepper motor.
  
-
   Main Theme:
   Using an input (the joystick) to control an digital output (the stepper motor).
 */
