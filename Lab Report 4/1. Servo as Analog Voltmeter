@@ -1,31 +1,46 @@
-#include <Servo.h>
+/*
+  Program Goal:
+  Reads a potentiometer value, controls a servo motor based on that value, converts it to a voltage, and displays the raw value, servo angle, and voltage on the Serial Monitor.
+  
+  Main Theme:
+  Controlling a servo motor's position using an analog input from a potentiometer and displaying the potentiometer's value and corresponding voltage on the Serial Monitor.
+*/
 
-Servo myservo;  // create servo object to control a servo
+#include <Servo.h>  // Include the Servo library to control servo motors
 
-int potpin = A0;  // analog pin used to connect the potentiometer
-int val;    // variable to read the value from the analog pin
+Servo myservo;  // Create a Servo object to control the servo motor
+
+int potpin = A0;  // Analog pin used to connect the potentiometer
+int val;    // Variable to store the potentiometer value read from the analog pin
 
 void setup() {
-  myservo.attach(9);  // attaches the servo on pin 9 to the servo object
-  Serial.begin(9600);
+  myservo.attach(9);  // Attach the servo to pin 9
+  Serial.begin(9600); // Initialize serial communication at 9600 baud rate
 }
 
 void loop() {
-  val = analogRead(potpin);            // reads the value of the potentiometer (value between 0 and 1023)
-  int angle = map(val, 0, 1023, 0, 180);     // scale it for use with the servo (value between 0 and 180)
-  myservo.write(angle);                  // sets the servo position according to the scaled value
-  int volt = map(val,0,1023,0,500);
-  float voltage = volt/100.0 ;
+  val = analogRead(potpin);  // Read the value from the potentiometer (range: 0 to 1023)
+  
+  // Map the potentiometer value to a servo angle (range: 0 to 180 degrees)
+  int angle = map(val, 0, 1023, 0, 180);     
+  
+  myservo.write(angle);  // Set the servo position based on the mapped angle
+  
+  // Map the potentiometer value to a voltage range (0 to 5V, scaled as 0 to 500 for easier conversion)
+  int volt = map(val, 0, 1023, 0, 500);  
+  float voltage = volt / 100.0;  // Convert the scaled value to a floating point voltage (range 0.0 to 5.0)
 
+  // Print the raw potentiometer value to the Serial Monitor
   Serial.print("bitvalue =");
   Serial.print(val);
-  Serial.print("/t");
-
+  Serial.print("\t");  // Add a tab space for better readability in the Serial Monitor
+  
+  // Print the servo angle to the Serial Monitor
   Serial.print("angle =");
   Serial.print(angle);
-  Serial.print("/t");
-
+  Serial.print("\t");  // Add a tab space for better readability in the Serial Monitor
+  
+  // Print the calculated voltage to the Serial Monitor
   Serial.print("voltage =");
-  Serial.println(voltage);
-
+  Serial.println(voltage);  // Print the voltage followed by a newline character
 }
